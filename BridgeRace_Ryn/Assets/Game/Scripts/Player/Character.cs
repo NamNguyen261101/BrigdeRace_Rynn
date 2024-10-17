@@ -12,11 +12,11 @@ public class Character : ColorObject
     private string _currentAnim;
 
     // Brick
-    [SerializeField] private PlayerBrick _playerBrickPrefab;
+    [SerializeField] private GameObject _charaterBrick;
     [SerializeField] private Transform _brickContainer;
     [SerializeField] protected Transform _skin;
-    private List<PlayerBrick> _playerBrickList = new List<PlayerBrick>();
-    private float brickHeight = 0.2f;
+    [SerializeField] private List<Brick> _playerBrickList = new List<Brick>();
+    private float brickHeight = 0.1f;
 
     public int _BrickCount => _playerBrickList.Count;
 
@@ -53,27 +53,55 @@ public class Character : ColorObject
     /// <returns></returns>
     public bool CanMove(Vector3 nextPoint)
     {
-        bool isCanMove = true;
         RaycastHit hit;
+        bool isCanMove = true;
 
-       /* if (Physics.Raycast(nextPoint, Vector3.down, out hit, 2f, stairLayer))
+        if (Physics.Raycast(nextPoint + Vector3.up, Vector3.down, out hit, 2.5f, stairLayer))
         {
+            Debug.DrawRay(nextPoint + Vector3.up, Vector3.down * 2f, Color.green, 1f);
+            /*if (nextPoint.z - TF.position.z < 1)
+            {
+                return true;
+            }
+            else
+            {
+                if (hit.collider.GetComponent<ColorObject>().OjbectColor == OjbectColor)
+                {
+                    return true;
+                }
+                else
+                {
+                    if (_playerBrickList.Count > 0)
+                    {
+                        RemoveBrick();
+                        hit.collider.GetComponent<ColorObject>().ChangeColor(OjbectColor);
+
+                        // Respawn a new Birck in current Stage
+                        // _stage.SpawnNewBrick(OjbectColor);
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+            }*/
+
             Stair stair = Cache.GetStair(hit.collider);
 
-            if (stair.colorType != colorType && playerBricks.Count > 0)
+            if (stair.OjbectColor != _colorTypeObj && _playerBrickList.Count > 0)
             {
-                stair.ChangeColor(colorType);
+                stair.ChangeColor(_colorTypeObj);
                 RemoveBrick();
-                stage.NewBrick(colorType);
+                _stage.SpawnNewBrick(_colorTypeObj);
             }
 
-            if (stair.colorType != colorType && playerBricks.Count == 0 && skin.forward.z > 0)
+            if (stair.OjbectColor != _colorTypeObj && _playerBrickList.Count == 0 && _skin.forward.z > 0)
             {
                 isCanMove = false;
             }
-        }*/
-
-        return isCanMove;
+        }
+        return true;
     }
 
     /// <summary>
@@ -81,10 +109,10 @@ public class Character : ColorObject
     /// </summary>
     public void AddBrick()
     {
-        PlayerBrick playerBrick = Instantiate(_playerBrickPrefab, _brickContainer);
-        playerBrick.ChangeColor(OjbectColor); // Color Object
-        playerBrick.TF.localPosition = Vector3.up * 0.25f * _playerBrickList.Count;
-        _playerBrickList.Add(playerBrick);
+        Brick newBrick = Instantiate(_charaterBrick.GetComponent<Brick>(), _brickContainer);
+        newBrick.ChangeColor(OjbectColor);
+        newBrick.TF.localPosition = Vector3.up * brickHeight * _playerBrickList.Count;
+        _playerBrickList.Add(newBrick);
     }
 
     /// <summary>
@@ -94,14 +122,14 @@ public class Character : ColorObject
     {
         if (_playerBrickList.Count > 0)
         {
-            PlayerBrick playerBrick = _playerBrickList[_playerBrickList.Count - 1];
+            Brick playerBrick = _playerBrickList[_playerBrickList.Count - 1];
             _playerBrickList.RemoveAt(_playerBrickList.Count - 1);
             Destroy(playerBrick.gameObject);
         }
     }
 
     /// <summary>
-    /// 
+    /// Clear Brick -> When start new level
     /// </summary>
     public void ClearBrick()
     {
@@ -125,17 +153,14 @@ public class Character : ColorObject
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag(CONSTANTS.TAG_BRICK)) 
+        if (other.CompareTag(CONSTANTS.TAG_BRICK) && other.GetComponent<ColorObject>().OjbectColor == _colorTypeObj)
         {
-            // Brick brick = Cache.GetBrick(other);
-            Brick brick;
-            Debug.Log("Caught Brick");
-           /* if (OjbectColor. == brick)
-            {
-                brick.OnDespawn();
-                AddBrick();
-                Destroy(brick.gameObject);
-            }*/
+            // ReAdd Brick to Stage
+            // other.GetComponent<Brick>().ReAddBrick();
+            AddBrick();
+            Destroy(other.gameObject);
         }
+
+      
     }
 }

@@ -9,4 +9,5 @@ public class CONSTANTS
     public const string ANIM_DANCE = "DANCE";
 
     public const string TAG_BRICK = "GroundBrick";
+    public const string TAG_STAIR = "StairBrick";
 }

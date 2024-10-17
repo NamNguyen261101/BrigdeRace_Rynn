@@ -1,10 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static ColorData;
 
 public class PlayerController : Character
 {
     [SerializeField] private float _speed = 5;
+
+
+    private void Start()
+    {
+        OnInit();
+    }
+
+    public override void OnInit()
+    {
+        ChangeColor(ColorTypeObject.Violet);
+    }
+
 
     void Update()
     {
@@ -31,26 +44,5 @@ public class PlayerController : Character
         {
             ChangeAnim(CONSTANTS.ANIM_IDLE);
         }
-
-        
     }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag(CONSTANTS.TAG_BRICK))
-        {
-            // Brick brick = Cache.GetBrick(other);
-            Brick brick;
-            Debug.Log("Caught Brick");
-            /* if (OjbectColor. == brick)
-             {
-                 brick.OnDespawn();
-                 AddBrick();
-                 Destroy(brick.gameObject);
-             }*/
-        }
-    }
-
-
-
 }

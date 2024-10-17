@@ -7,7 +7,7 @@ public class ColorObject : GameUnit
 {
     [SerializeField] private ColorData colorData;
     [SerializeField] private Renderer renderer;
-    [SerializeField] protected ColorTypeObject _colorTypeObj;
+    protected ColorTypeObject _colorTypeObj;
 
 
     public ColorTypeObject OjbectColor

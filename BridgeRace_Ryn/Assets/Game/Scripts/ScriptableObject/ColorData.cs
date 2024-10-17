@@ -15,14 +15,15 @@ public class ColorData : ScriptableObject
 
     public enum ColorTypeObject
     {
-        Black = 0,
-        Red = 1,
-        Blue = 2,
-        Green = 3,
-        Yellow = 4,
-        Orange = 5,
-        Brown = 6,
-        Violet = 7
+        Default = 0,
+        Black = 1,
+        Red = 2,
+        Blue = 3,
+        Green = 4,
+        Yellow = 5,
+        Orange = 6,
+        Brown = 7,
+        Violet = 8
     }
 
 }

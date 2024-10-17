@@ -4,15 +4,13 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] private Transform TF;
+    [SerializeField] private Transform playerTF;
 
-    // Update is called once per frame
-    void Update()
+    [SerializeField] Vector3 offset;
+
+    private void LateUpdate()
     {
-        
+        TF.position = Vector3.Lerp(TF.position, playerTF.position + offset, Time.deltaTime * 5f);
     }
 }

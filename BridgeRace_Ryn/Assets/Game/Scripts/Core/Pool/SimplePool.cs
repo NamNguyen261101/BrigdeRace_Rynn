@@ -5,6 +5,28 @@
 ///   UPDATES:
 /// 	2015-04-16: Changed Pool to use a Stack generic.
 /// 	
+/// Usage:
+/// 
+///   There's no need to do any special setup of any kind.
+/// 
+///   Instead of calling Instantiate(), use this:
+///       SimplePool.Spawn(somePrefab, somePosition, someRotation);
+/// 
+///   Instead of destroying an object, use this:
+///       SimplePool.Despawn(myGameObject);
+/// 
+///   If desired, you can preload the pool with a number of instances:
+///       SimplePool.Preload(somePrefab, 20);
+/// 
+/// Remember that Awake and Start will only ever be called on the first instantiation
+/// and that member variables won't be reset automatically.  You should reset your
+/// object yourself after calling Spawn().  (i.e. You'll have to do things like set
+/// the object's HPs to max, reset animation states, etc...)
+/// 
+/// 
+
+
+
 using System.Collections;
 using System.Collections.Generic;
 using System;

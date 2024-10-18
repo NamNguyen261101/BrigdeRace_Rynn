@@ -12,10 +12,11 @@ public class Character : ColorObject
     private string _currentAnim;
 
     // Brick
-    [SerializeField] private GameObject _charaterBrick;
+    [SerializeField] private PlayerBrick _playerBrickPrefab;
+    // [SerializeField] private GameObject _charaterBrick;
     [SerializeField] private Transform _brickContainer;
     [SerializeField] protected Transform _skin;
-    [SerializeField] private List<Brick> _playerBrickList = new List<Brick>();
+    [SerializeField] private List<PlayerBrick> _playerBrickList = new List<PlayerBrick>();
     private float brickHeight = 0.1f;
 
     public int _BrickCount => _playerBrickList.Count;
@@ -39,7 +40,7 @@ public class Character : ColorObject
 
         if (Physics.Raycast(nextPoint, Vector3.down, out hit, 2f, groundLayer))
         {
-            Debug.DrawRay(nextPoint + Vector3.up, Vector3.down * 2f, Color.red, 0.5f);
+            Debug.DrawRay(nextPoint, Vector3.down * 2f, Color.red, 0.5f);
             return hit.point + Vector3.up * 0.1f;
         }
 
@@ -56,9 +57,9 @@ public class Character : ColorObject
         RaycastHit hit;
         bool isCanMove = true;
 
-        if (Physics.Raycast(nextPoint + Vector3.up, Vector3.down, out hit, 2.5f, stairLayer))
+        if (Physics.Raycast(nextPoint, Vector3.down, out hit, 2.5f, stairLayer))
         {
-            Debug.DrawRay(nextPoint + Vector3.up, Vector3.down * 2f, Color.green, 1f);
+            Debug.DrawRay(nextPoint, Vector3.down * 2f, Color.green, 0.5f);
           
 
             Stair stair = Cache.GetStair(hit.collider);
@@ -83,10 +84,10 @@ public class Character : ColorObject
     /// </summary>
     public void AddBrick()
     {
-        Brick newBrick = Instantiate(_charaterBrick.GetComponent<Brick>(), _brickContainer);
-        newBrick.ChangeColor(OjbectColor);
-        newBrick.TF.localPosition = Vector3.up * brickHeight * _playerBrickList.Count;
-        _playerBrickList.Add(newBrick);
+        PlayerBrick playerBrick = Instantiate(_playerBrickPrefab, _brickContainer);
+        playerBrick.ChangeColor(OjbectColor);
+        playerBrick.TF.localPosition = Vector3.up * 0.25f * _playerBrickList.Count;
+        _playerBrickList.Add(playerBrick);
     }
 
     /// <summary>
@@ -96,7 +97,7 @@ public class Character : ColorObject
     {
         if (_playerBrickList.Count > 0)
         {
-            Brick playerBrick = _playerBrickList[_playerBrickList.Count - 1];
+            PlayerBrick playerBrick = _playerBrickList[_playerBrickList.Count - 1];
             _playerBrickList.RemoveAt(_playerBrickList.Count - 1);
             Destroy(playerBrick.gameObject);
         }
@@ -115,6 +116,10 @@ public class Character : ColorObject
         _playerBrickList.Clear();
     }
 
+    /// <summary>
+    /// Change Animation Player
+    /// </summary>
+    /// <param name="animName"></param>
     public void ChangeAnim(string animName)
     {
         if (_currentAnim != animName)
@@ -134,7 +139,7 @@ public class Character : ColorObject
             // other.GetComponent<Brick>().ReAddBrick();
             if (brick.OjbectColor == _colorTypeObj)
             {
-                brick.OnDespawn();
+                // brick.OnDespawn();
                 AddBrick();
                 Destroy(other.gameObject);
             }

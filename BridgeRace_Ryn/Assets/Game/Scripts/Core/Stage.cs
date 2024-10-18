@@ -132,7 +132,6 @@ public class Stage : MonoBehaviour
                 break;
             }
         }
-
         return brick;
     }
 

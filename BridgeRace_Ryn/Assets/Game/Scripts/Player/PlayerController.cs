@@ -28,8 +28,7 @@ public class PlayerController : Character
 
             if (CanMove(nextPoint))
             {
-                TF.position = CheckGround(nextPoint);
-                //ChangeAnim(CONSTANTS.ANIM_RUN);
+                TF.position = CheckGround(nextPoint);  
             }
 
             if (JoystickController.direct != Vector3.zero)

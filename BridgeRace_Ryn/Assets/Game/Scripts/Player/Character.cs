@@ -59,41 +59,15 @@ public class Character : ColorObject
         if (Physics.Raycast(nextPoint + Vector3.up, Vector3.down, out hit, 2.5f, stairLayer))
         {
             Debug.DrawRay(nextPoint + Vector3.up, Vector3.down * 2f, Color.green, 1f);
-            /*if (nextPoint.z - TF.position.z < 1)
-            {
-                return true;
-            }
-            else
-            {
-                if (hit.collider.GetComponent<ColorObject>().OjbectColor == OjbectColor)
-                {
-                    return true;
-                }
-                else
-                {
-                    if (_playerBrickList.Count > 0)
-                    {
-                        RemoveBrick();
-                        hit.collider.GetComponent<ColorObject>().ChangeColor(OjbectColor);
-
-                        // Respawn a new Birck in current Stage
-                        // _stage.SpawnNewBrick(OjbectColor);
-                        return true;
-                    }
-                    else
-                    {
-                        return false;
-                    }
-                }
-            }*/
+          
 
             Stair stair = Cache.GetStair(hit.collider);
 
             if (stair.OjbectColor != _colorTypeObj && _playerBrickList.Count > 0)
             {
-                stair.ChangeColor(_colorTypeObj);
+                stair.ChangeColor(OjbectColor); // _colorTypeObj
                 RemoveBrick();
-                _stage.SpawnNewBrick(_colorTypeObj);
+                _stage.AddBrick(OjbectColor);
             }
 
             if (stair.OjbectColor != _colorTypeObj && _playerBrickList.Count == 0 && _skin.forward.z > 0)
@@ -153,12 +127,19 @@ public class Character : ColorObject
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag(CONSTANTS.TAG_BRICK) && other.GetComponent<ColorObject>().OjbectColor == _colorTypeObj)
+        if (other.CompareTag(CONSTANTS.TAG_BRICK)) // && other.GetComponent<ColorObject>().OjbectColor == _colorTypeObj
         {
+            Brick brick = Cache.GetBrick(other);
             // ReAdd Brick to Stage
             // other.GetComponent<Brick>().ReAddBrick();
-            AddBrick();
-            Destroy(other.gameObject);
+            if (brick.OjbectColor == _colorTypeObj)
+            {
+                brick.OnDespawn();
+                AddBrick();
+                Destroy(other.gameObject);
+            }
+              /*  AddBrick();
+            Destroy(other.gameObject);*/
         }
 
       

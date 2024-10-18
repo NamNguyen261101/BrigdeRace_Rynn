@@ -67,6 +67,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 732f6d4bd33d678468e57b881f094500, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  poolType: 1
   colorData: {fileID: 11400000, guid: a239c29403534c042b8455604b602a25, type: 2}
   renderer: {fileID: 5926402158059094904}
   stage: {fileID: 0}

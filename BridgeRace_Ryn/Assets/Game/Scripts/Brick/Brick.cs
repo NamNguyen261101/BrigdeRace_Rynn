@@ -17,11 +17,15 @@ public class Brick : ColorObject
     {
         ChangeColor(ColorTypeObject.Violet);
     }
-    public void ReAddBrick() 
+    /*public void ReAddBrick()
     {
-        stage.AddBrick(this);
-    }
+        //stage.AddBrick(this);
+    }*/
 
+    public void OnDespawn()
+    {
+        stage.RemoveBrick(this);
+    }
 
    /* private void OnTriggerEnter(Collider other)
     {

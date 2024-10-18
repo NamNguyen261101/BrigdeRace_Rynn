@@ -7,7 +7,7 @@ public class ColorObject : GameUnit
 {
     [SerializeField] private ColorData colorData;
     [SerializeField] private Renderer renderer;
-    protected ColorTypeObject _colorTypeObj;
+    public ColorTypeObject _colorTypeObj;
 
 
     public ColorTypeObject OjbectColor
@@ -32,7 +32,7 @@ public class ColorObject : GameUnit
 
     public override void OnDespawn()
     {
-        throw new System.NotImplementedException();
+        
     }
 
     public override void OnInit()

@@ -639,6 +639,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7415224271218310543, guid: ef8236f7d14d3794695cf92363ad2fe5, type: 3}
   m_PrefabInstance: {fileID: 256044412}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &269593755
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 269593756}
+  m_Layer: 0
+  m_Name: Bricks
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &269593756
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 269593755}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 448234183}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &285181368
 GameObject:
   m_ObjectHideFlags: 0
@@ -840,6 +871,57 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3263847707589683826, guid: d87c4522f71258148ba750ad6f48687d, type: 3}
   m_PrefabInstance: {fileID: 419310425}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &448234181
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 448234183}
+  - component: {fileID: 448234182}
+  m_Layer: 0
+  m_Name: Pool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &448234182
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 448234181}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9e3df9d4a1306f48b6bcc69989b0cf9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Pool:
+  - root: {fileID: 269593756}
+    prefab: {fileID: 6306322679882796025, guid: 3551d379e91a9804a972682056450450, type: 3}
+    amount: 0
+    collect: 0
+    clamp: 0
+--- !u!4 &448234183
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 448234181}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.121195, y: -4.7609053, z: 4.5384874}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 269593756}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &487630039
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3261,8 +3343,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e966a0d2957e69d42bdb31c7f2b9216d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  poolType: 0
   colorData: {fileID: 11400000, guid: a239c29403534c042b8455604b602a25, type: 2}
   renderer: {fileID: 915360288}
+  _colorTypeObj: 0
   anim: {fileID: 1145798664}
   groundLayer:
     serializedVersion: 2
@@ -3275,7 +3359,7 @@ MonoBehaviour:
   _skin: {fileID: 1969881879}
   _playerBrickList: []
   _stage: {fileID: 0}
-  _speed: 3
+  _speed: 5
 --- !u!1001 &2115646499
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3425,3 +3509,4 @@ SceneRoots:
   - {fileID: 612809925}
   - {fileID: 1997979444}
   - {fileID: 715361078}
+  - {fileID: 448234183}

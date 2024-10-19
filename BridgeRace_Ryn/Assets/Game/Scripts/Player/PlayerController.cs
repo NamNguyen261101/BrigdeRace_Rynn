@@ -28,6 +28,7 @@ public class PlayerController : Character
 
             if (CanMove(nextPoint))
             {
+                Debug.Log(CanMove(nextPoint));
                 TF.position = CheckGround(nextPoint);  
             }
 

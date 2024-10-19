@@ -10,7 +10,7 @@ public class ColorObject : GameUnit
     public ColorTypeObject _colorTypeObj;
 
 
-    public ColorTypeObject OjbectColor
+    public ColorTypeObject ObjectColor
     {
         get
         {

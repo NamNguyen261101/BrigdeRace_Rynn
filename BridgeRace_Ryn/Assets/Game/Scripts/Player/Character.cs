@@ -64,15 +64,16 @@ public class Character : ColorObject
 
             Stair stair = Cache.GetStair(hit.collider);
 
-            if (stair.OjbectColor != _colorTypeObj && _playerBrickList.Count > 0)
+            if (stair._colorTypeObj != _colorTypeObj && _playerBrickList.Count > 0)
             {
-                stair.ChangeColor(OjbectColor); // _colorTypeObj
+                stair.ChangeColor(_colorTypeObj); // _colorTypeObj OjbectColor
                 RemoveBrick();
-                _stage.AddBrick(OjbectColor);
+                _stage.NewBrick(_colorTypeObj);
             }
 
-            if (stair.OjbectColor != _colorTypeObj && _playerBrickList.Count == 0 && _skin.forward.z > 0)
+            if (stair._colorTypeObj != _colorTypeObj && _playerBrickList.Count == 0 && _skin.forward.z > 0)
             {
+                
                 isCanMove = false;
             }
         }
@@ -85,7 +86,7 @@ public class Character : ColorObject
     public void AddBrick()
     {
         PlayerBrick playerBrick = Instantiate(_playerBrickPrefab, _brickContainer);
-        playerBrick.ChangeColor(OjbectColor);
+        playerBrick.ChangeColor(_colorTypeObj);
         playerBrick.TF.localPosition = Vector3.up * 0.25f * _playerBrickList.Count;
         _playerBrickList.Add(playerBrick);
     }
@@ -132,14 +133,13 @@ public class Character : ColorObject
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag(CONSTANTS.TAG_BRICK)) // && other.GetComponent<ColorObject>().OjbectColor == _colorTypeObj
+        if (other.CompareTag(CONSTANTS.TAG_BRICK)) 
         {
             Brick brick = Cache.GetBrick(other);
-            // ReAdd Brick to Stage
-            // other.GetComponent<Brick>().ReAddBrick();
-            if (brick.OjbectColor == _colorTypeObj)
+            
+            if (brick._colorTypeObj == _colorTypeObj) // ObjectColor
             {
-                // brick.OnDespawn();
+                brick.OnDespawn();
                 AddBrick();
                 Destroy(other.gameObject);
             }

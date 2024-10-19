@@ -13,28 +13,14 @@ public class Brick : ColorObject
         OnInit();
     }
 
-    public override void OnInit()
+    public void OnInit()
     {
         ChangeColor(ColorTypeObject.Violet);
     }
-    /*public void ReAddBrick()
-    {
-        //stage.AddBrick(this);
-    }*/
-
-    public void OnDespawn()
+   
+    public void OnDespawn(Collider colli)
     {
         stage.RemoveBrick(this);
     }
-
-   /* private void OnTriggerEnter(Collider other)
-    {
-        // TO DO
-        if (other.CompareTag("Player") && other.GetComponent<ColorObject>().OjbectColor == _colorTypeObj)
-        {
-            // Debug.Log("Remove brick");
-            Destroy(t);
-        }
-    }*/
 
 }
